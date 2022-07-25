@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { FaPlay, FaPause } from 'react-icons/fa';
+import { VscDebugPause, VscDebugStart } from 'react-icons/vsc';
 import Modal from 'react-modal';
 import './App.css';
 import LoginForm from './components/LoginForm';
@@ -91,7 +91,7 @@ function App() {
 
       <div className='soundPlay'>
         <button className='playButton' onClick={togglePlayPause}>
-          {isPlaying ? <FaPause /> : <FaPlay />}
+          {isPlaying ? <VscDebugPause /> : <VscDebugStart />}
         </button>
         <input
           type='range'

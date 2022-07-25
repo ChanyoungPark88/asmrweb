@@ -1,16 +1,43 @@
 import React, { useState } from 'react';
-import { FaRegWindowClose } from 'react-icons/fa';
+import { AiOutlineClose } from 'react-icons/ai';
 
 function ChatRoom({ Logout }) {
-  const [details, setDetails] = useState('');
+  const [message, setMessage] = useState('');
 
   return (
     <div className='chatContainer'>
-      <FaRegWindowClose className='quitButton' onClick={Logout} />
+      <AiOutlineClose className='quitButton' onClick={Logout} />
       <div className='chatBox'>
-        <h2>Chat Room Text Box</h2>
+        <div className='chatMessages'>
+          <div class='message'>
+            <p class='meta'>
+              Brad <span>9:12pm</span>
+            </p>
+            <p class='text'>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
+              repudiandae.
+            </p>
+          </div>
+          <div class='message'>
+            <p class='meta'>
+              Mary <span>9:15pm</span>
+            </p>
+            <p class='text'>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
+              repudiandae.
+            </p>
+          </div>
+        </div>
         <div className='chatInput'>
-          <input type='text' placeholder='Type on here' required />
+          <input
+            id='msg'
+            type='text'
+            placeholder='Enter message'
+            required
+            autoComplete='off'
+            onChange={(e) => setMessage({ message: e.target.value })}
+            value={message}
+          />
           <input type='submit' value='Send' />
         </div>
       </div>
