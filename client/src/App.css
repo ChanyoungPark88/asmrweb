@@ -1,0 +1,127 @@
+.soundPlay,
+.enterChat {
+  padding: 0 2rem;
+  display: grid;
+  margin-bottom: 10px;
+}
+
+/* Buttons */
+.playButton {
+  background-color: transparent;
+  border: 0;
+  color: gray;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.playButton:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.playButton:hover,
+.playButton:active {
+  outline: 0;
+  color: #ffc2a1be;
+  border-color: #ffc2a1be;
+}
+
+.submit {
+  margin-top: 15px;
+  display: inline-block;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: none;
+  background-size: 200%;
+  background-position: 0%;
+  transition: 0.4s;
+  background-color: #ffc2a1be;
+  color: white;
+  width: 101%;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.submit:hover {
+  background-position: 100% 0%;
+}
+
+/* Progress bar */
+
+.progressBar {
+  --bar-bg: azure;
+  --seek-before-width: 0;
+  --seek-before-color: #ffc2a1;
+  --knobby: #3452a5;
+  --selectedKnobby: #26c9c3;
+
+  appearance: none;
+  background: var(--bar-bg);
+  border-radius: 12px;
+  position: relative;
+  width: 99%;
+  height: 11px;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Modal style */
+.loginContainer {
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.loginContainer h2 {
+  color: white;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.loginContainer label {
+  color: black;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.loginContainer input,
+.welcome button {
+  font-size: 20px;
+  border: none;
+}
+
+.loginContainer input[type='submit'],
+.welcome button {
+  margin-left: 5px;
+  border: none;
+  color: white;
+  background-color: #ffc2a1be;
+  cursor: pointer;
+}
+
+.loginContainer input[type='submit']:hover,
+.welcome button:hover {
+  outline: 0;
+  color: black;
+}
+
+/* ChatBox */
+.chatBox {
+  display: grid;
+  max-width: 480px;
+  background-color: transparent;
+  padding: 15px 30px;
+}
+
+.quitButton {
+  background-color: transparent;
+  color: white;
+  position: absolute;
+  right: 0;
+  width: 40px;
+  transform: translateY(-50%);
+  border: none;
+  font-size: 25px;
+}
