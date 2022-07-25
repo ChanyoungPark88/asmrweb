@@ -11,7 +11,7 @@ function ChatRoom({ Logout }) {
         <h2>Chat Room Text Box</h2>
         <div className='chatInput'>
           <input type='text' placeholder='Type on here' required />
-          <input type='submit' value='enter' />
+          <input type='submit' value='Send' />
         </div>
       </div>
     </div>

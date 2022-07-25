@@ -87,13 +87,18 @@
 }
 
 .loginContainer input,
-.welcome button {
+.chatBox input {
   font-size: 20px;
   border: none;
 }
 
+.loginContainer input:focus,
+.chatBox input:focus {
+  outline: none;
+}
+
 .loginContainer input[type='submit'],
-.welcome button {
+.chatBox input[type='submit'] {
   margin-left: 5px;
   border: none;
   color: white;
@@ -102,7 +107,7 @@
 }
 
 .loginContainer input[type='submit']:hover,
-.welcome button:hover {
+.chatBox input[type='submit']:hover {
   outline: 0;
   color: black;
 }
