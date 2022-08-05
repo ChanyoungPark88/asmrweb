@@ -35,15 +35,10 @@ function App() {
   };
 
   const Login = (user) => {
-    console.log(user);
+    // console.log(user);
     setUser({
       name: user.name,
     });
-  };
-
-  const Logout = () => {
-    setUser({ name: '' });
-    console.log('Logged out');
   };
 
   // Modal Styles
@@ -115,7 +110,7 @@ function App() {
         style={customStyles}
       >
         {user.name !== '' ? (
-          <ChatRoom Logout={Logout} />
+          <ChatRoom user={user} setUser={setUser} />
         ) : (
           <LoginForm Login={Login} error={error} />
         )}

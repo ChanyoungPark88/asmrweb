@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
 function LoginForm({ Login }) {
-  const [details, setDetails] = useState({ name: '' });
+  const [user, setUser] = useState({ name: '' });
 
   const submitHandler = (e) => {
     e.preventDefault();
-    Login(details);
-    console.log(details);
+    Login(user);
+    // console.log(user);
   };
 
   return (
@@ -16,8 +16,8 @@ function LoginForm({ Login }) {
         <input
           type='text'
           placeholder='name'
-          onChange={(e) => setDetails({ ...details, name: e.target.value })}
-          value={details.name}
+          onChange={(e) => setUser({ ...user, name: e.target.value })}
+          value={user.name}
           required
         />
         <input type='submit' value='Enter' />

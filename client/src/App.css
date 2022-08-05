@@ -9,7 +9,7 @@
 .playButton {
   background-color: transparent;
   border: 0;
-  color: gray;
+  color: #fff;
   font-size: 40px;
   cursor: pointer;
   padding: 10px;
@@ -23,7 +23,7 @@
 .playButton:hover,
 .playButton:active {
   outline: 0;
-  color: #ffc2a1be;
+  color: #dc6f6fbe;
   border-color: #ffc2a1be;
 }
 
@@ -36,16 +36,20 @@
   background-size: 200%;
   background-position: 0%;
   transition: 0.4s;
-  background-color: #ffc2a1be;
-  color: white;
+  background-color: #fff;
+  color: black;
   width: 101%;
   font-size: 20px;
   font-weight: 600;
   cursor: pointer;
+  box-shadow: 1px 1px 2px black;
 }
 
 .submit:hover {
   background-position: 100% 0%;
+  outline: 0;
+  color: white;
+  background-color: #ffc2a1be;
 }
 
 /* Progress bar */
@@ -114,9 +118,8 @@
 
 /* ChatBox */
 .chatContainer {
-  height: 80vh;
-  width: 80vw;
-  /* max-width: 480px; */
+  max-width: 83%;
+  height: auto;
 }
 
 .quitButton {
@@ -132,13 +135,14 @@
 
 .chatBox {
   display: grid;
-  max-width: 480px;
-
+  max-width: 80%;
+  height: auto;
   padding: 15px 30px;
 }
 
 .chatMessages {
   padding: 30px;
+  max-width: 100%;
   height: 70vh;
   overflow-y: scroll;
   margin-bottom: 15px;
