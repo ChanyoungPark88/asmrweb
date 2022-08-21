@@ -3,63 +3,72 @@ const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const Message = require('./models/messageModel');
 const colors = require('colors');
+const http = require('http');
+const cors = require('cors');
+const { Server } = require('socket.io');
 
-dotenv.config();
-// Connect to the MongoDB
-connectDB();
-// Create express app
 const app = express();
-// Middleware
-app.use(express.json());
+app.use(cors());
 
-// Get Method
-app.get('/', (req, res) => {
-  res.send('API is Running');
-});
-// SendMessage
-app.get('/api/message', (req, res) => {
-  const message = new Message({
-    name: req.body.details.name,
-    message: 'So do I.',
-    timestamp: Date.now(),
-  });
-  message
-    .save()
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
+// Form here Realtime Socket PART
+const server = http.createServer(app);
 
-// View all Messages
-app.get('/api/messages', (req, res) => {
-  Message.find()
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
-
-// Post Method
-
-const PORT = process.env.PORT || 5000;
-app.listen(5000, console.log(`Server is Running on Port ${PORT}`.yellow.bold));
-
-const io = require('socket.io')(server, {
-  pingTimeout: 60000,
+const io = new Server(server, {
   cors: {
     origin: 'http://localhost:3000',
+    methods: ['GET', 'POST'],
   },
 });
 
 io.on('connection', (socket) => {
-  console.log('Connected to socket.io');
-  socket.on('setup', (details) => {
-    socket.join(details.name);
-    socket.emit('connected');
+  console.log(`User Connected: ${socket.id}`);
+
+  socket.on('join_room', (data) => {
+    socket.join(data);
+    console.log(`User with ID: ${socket.id} joined room`);
+  });
+
+  socket.on('send_message', (data) => {
+    socket.to(data.room).emit('receive_message', data);
+    console.log(data);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('User Disconnected', socket.id);
   });
 });
+
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, () => {
+  console.log(`Server is Running on Port ${PORT}`.yellow.bold);
+});
+
+// app.get('/', (req, res) => {
+//   res.send('API is Running');
+// });
+// app.listen(5000, console.log(`Server is Running on Port ${PORT}`.yellow.bold));
+
+// dotenv.config();
+// Connect to the MongoDB
+// connectDB();
+// Create express app
+
+// const messages = [];
+
+// Middleware
+// app.use(express.json());
+// app.use(express.static(path.join(__dirname, '../client/build')));
+
+// FetchMessages
+// app.get('/api/messages', (req, res) => {
+//   console.log('api/messages called!');
+//   res.json(messages);
+// });
+
+// SendMessage
+// app.post('/api/message', (req, res) => {
+//   const message = req.body.data;
+//   console.log('Adding Message::::', message);
+//   messages.push(message);
+//   res.json('message' + message + 'added');
+// });

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ImEnter } from 'react-icons/im';
 
 function LoginForm({ Login }) {
   const [user, setUser] = useState({ name: '' });
@@ -6,12 +7,11 @@ function LoginForm({ Login }) {
   const submitHandler = (e) => {
     e.preventDefault();
     Login(user);
-    // console.log(user);
   };
 
   return (
     <form onSubmit={submitHandler}>
-      <div className='loginContainer'>
+      <div className='login-container'>
         <h2>Enter the chatroom</h2>
         <input
           type='text'
@@ -20,7 +20,7 @@ function LoginForm({ Login }) {
           value={user.name}
           required
         />
-        <input type='submit' value='Enter' />
+        <ImEnter type='submit' className='chat-enter' />
       </div>
     </form>
   );

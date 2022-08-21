@@ -4,15 +4,17 @@ import Modal from 'react-modal';
 import './App.css';
 import LoginForm from './components/LoginForm';
 import ChatRoom from './components/ChatRoom';
+import io from 'socket.io-client';
 
 Modal.setAppElement('#root');
+
+const socket = io.connect('http://localhost:5000');
 
 function App() {
   // states
   const [isPlaying, setIsPlaying] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [user, setUser] = useState({ name: '' });
-  const [error, setError] = useState('');
 
   // references
   const audioPlayer = useRef();
@@ -35,10 +37,15 @@ function App() {
   };
 
   const Login = (user) => {
-    // console.log(user);
     setUser({
       name: user.name,
     });
+  };
+
+  const JoinRoom = () => {
+    if (user.name !== '') {
+      socket.emit('join_room');
+    }
   };
 
   // Modal Styles
@@ -77,6 +84,7 @@ function App() {
         <audio
           ref={audioPlayer}
           src='https://drive.google.com/uc?export=view&id=1pecUsLuer7li1A32UbOoX3JYoITRWFRM'
+          // src='https://music.youtube.com/watch?v=3R9lbXGuAww'
           type='audio/mpeg'
           preload='metadata'
           loop
@@ -110,9 +118,14 @@ function App() {
         style={customStyles}
       >
         {user.name !== '' ? (
-          <ChatRoom user={user} setUser={setUser} />
+          <ChatRoom
+            user={user}
+            setUser={setUser}
+            socket={socket}
+            JoinRoom={JoinRoom}
+          />
         ) : (
-          <LoginForm Login={Login} error={error} />
+          <LoginForm Login={Login} />
         )}
       </Modal>
     </div>
