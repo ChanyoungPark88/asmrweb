@@ -10,9 +10,16 @@ function ChatRoom(props) {
   const sendMessage = async () => {
     if (currentMessage !== '') {
       const messageData = {
+        room: props.room,
         name: props.user.name,
         message: currentMessage,
         time:
+          new Date(Date.now()).getFullYear() +
+          '/' +
+          (new Date(Date.now()).getMonth() + 1) +
+          '/' +
+          new Date(Date.now()).getDate() +
+          ' ' +
           new Date(Date.now()).getHours() +
           ':' +
           new Date(Date.now()).getMinutes(),
@@ -23,7 +30,7 @@ function ChatRoom(props) {
       setCurrentMessage('');
     }
   };
-
+  // console.log(messageList);
   useEffect(() => {
     props.socket.on('receive_message', (data) => {
       setMessageList((list) => [...list, data]);
@@ -66,6 +73,7 @@ function ChatRoom(props) {
           type='text'
           value={currentMessage}
           placeholder='Write message here'
+          required
           onChange={(event) => {
             setCurrentMessage(event.target.value);
           }}
@@ -73,9 +81,9 @@ function ChatRoom(props) {
             event.key === 'Enter' && sendMessage();
           }}
         />
-        <AiOutlineSend className='send-message' onClick={sendMessage}>
-          Enter
-        </AiOutlineSend>
+        <button className='send-message' onClick={sendMessage}>
+          &#8629;
+        </button>
       </div>
     </div>
   );

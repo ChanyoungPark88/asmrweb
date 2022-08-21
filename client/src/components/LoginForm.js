@@ -1,26 +1,37 @@
 import React, { useState } from 'react';
-import { ImEnter } from 'react-icons/im';
+import { AiOutlineClose } from 'react-icons/ai';
 
-function LoginForm({ Login }) {
+function LoginForm({ Login, setModalIsOpen, joinRoom }) {
   const [user, setUser] = useState({ name: '' });
 
   const submitHandler = (e) => {
     e.preventDefault();
     Login(user);
+    console.log(user);
   };
 
   return (
     <form onSubmit={submitHandler}>
-      <div className='login-container'>
-        <h2>Enter the chatroom</h2>
-        <input
-          type='text'
-          placeholder='name'
-          onChange={(e) => setUser({ ...user, name: e.target.value })}
-          value={user.name}
-          required
-        />
-        <ImEnter type='submit' className='chat-enter' />
+      <div className='login-window'>
+        <div className='login-header'>
+          <h2>Enter the chatroom</h2>
+          <AiOutlineClose
+            className='quit-window'
+            onClick={() => setModalIsOpen(false)}
+          />
+        </div>
+        <div className='login-footer'>
+          <input
+            type='text'
+            placeholder='name'
+            onChange={(e) => setUser({ ...user, name: e.target.value })}
+            value={user.name}
+            required
+          />
+          <button onClick={joinRoom} className='chat-enter'>
+            &#8629;
+          </button>
+        </div>
       </div>
     </form>
   );

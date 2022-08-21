@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap');
+
 .soundPlay,
 .enterChat {
   padding: 0 2rem;
@@ -72,48 +74,53 @@
 }
 
 /* Modal style */
-.login-container {
+.login-window {
   align-items: center;
   justify-content: space-between;
-  margin: 10px;
+  margin: 0;
 }
 
-.login-container h2 {
+.login-window .login-header {
+  display: flex;
+}
+
+.login-window .login-header h2 {
   color: white;
   font-size: 24px;
   font-weight: 500;
 }
 
-.login-container label {
-  color: black;
-  font-size: 20px;
-  font-weight: 400;
-}
-
-.login-container input,
-.chatBox input {
-  font-size: 20px;
+.login-window .login-header .quit-window {
+  background-color: transparent;
+  color: white;
+  position: absolute;
+  transform: translateX(1040%);
   border: none;
-}
-
-.login-container input:focus,
-.chatBox input:focus {
-  outline: none;
-}
-
-.loginContainer .chat-enter,
-.chatBox .send-message {
-  margin-left: 5px;
-  border: none;
-  color: black;
-  background-color: #fff;
+  font-size: 25px;
   cursor: pointer;
 }
 
-.loginContainer .chat-enter:hover,
-.chatBox .send-message:hover {
+.login-window input {
+  font-size: 20px;
+  border: none;
+}
+
+.login-window input:focus {
+  outline: none;
+}
+
+.login-window .chat-enter {
+  font-size: 2em;
+  margin-left: 5px;
+  border: none;
+  color: lightgray;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.login-window .chat-enter:hover {
   outline: 0;
-  color: black;
+  color: white;
 }
 
 /* ChatBox */
@@ -153,7 +160,8 @@
 }
 
 .chat-window .chat-body {
-  height: calc(100% / 1.2);
+  height: 85%;
+  max-height: 85%;
   border: 1px solid #263238;
   background: transparent;
   position: relative;
@@ -177,11 +185,12 @@
 }
 
 .chat-window .chat-body .message .message-content {
+  font-family: 'Nanum Gothic Coding', monospace;
   width: auto;
   height: auto;
   min-height: 40px;
-  max-width: 120px;
-  background-color: #fff;
+  max-width: 50vw;
+  background-color: rgb(255, 255, 255);
   border-radius: 5px;
   color: black;
   display: flex;
@@ -245,7 +254,6 @@
   padding: 0 0.7em;
   font-size: 1em;
   border-right: 1px dotted #607d8b;
-
   outline: none;
   font-family: 'Open Sans', sans-serif;
 }
@@ -257,14 +265,14 @@
   cursor: pointer;
   flex: 10%;
   height: 100%;
-  background: transparent;
+  background: white;
   outline: none;
   font-size: 25px;
-  color: lightgray;
+  color: black;
 }
 
 .chat-window .chat-footer .send-message:hover {
-  color: #fff;
+  color: gray;
 }
 .hide {
   opacity: 0 !important;

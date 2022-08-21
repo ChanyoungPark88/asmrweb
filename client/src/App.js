@@ -15,6 +15,7 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [user, setUser] = useState({ name: '' });
+  const [room, setRoom] = useState('');
 
   // references
   const audioPlayer = useRef();
@@ -42,9 +43,9 @@ function App() {
     });
   };
 
-  const JoinRoom = () => {
+  const joinRoom = () => {
     if (user.name !== '') {
-      socket.emit('join_room');
+      socket.emit('join_room', room);
     }
   };
 
@@ -118,14 +119,9 @@ function App() {
         style={customStyles}
       >
         {user.name !== '' ? (
-          <ChatRoom
-            user={user}
-            setUser={setUser}
-            socket={socket}
-            JoinRoom={JoinRoom}
-          />
+          <ChatRoom user={user} setUser={setUser} socket={socket} room={room} />
         ) : (
-          <LoginForm Login={Login} />
+          <LoginForm Login={Login} setModalIsOpen={setModalIsOpen} />
         )}
       </Modal>
     </div>
