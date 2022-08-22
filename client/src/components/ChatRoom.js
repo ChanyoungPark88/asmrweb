@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { AiOutlineClose, AiOutlineSend } from 'react-icons/ai';
+import { AiOutlineClose } from 'react-icons/ai';
 import ScrollToBottom from 'react-scroll-to-bottom';
 // import axios from 'axios';
 
-function ChatRoom(props) {
+function ChatRoom({ socket, user, Logout }) {
   const [currentMessage, setCurrentMessage] = useState('');
   const [messageList, setMessageList] = useState([]);
 
   const sendMessage = async () => {
     if (currentMessage !== '') {
       const messageData = {
-        room: props.room,
-        name: props.user.name,
+        name: user.name,
         message: currentMessage,
         time:
           new Date(Date.now()).getFullYear() +
@@ -25,37 +24,38 @@ function ChatRoom(props) {
           new Date(Date.now()).getMinutes(),
       };
 
-      await props.socket.emit('send_message', messageData);
+      await socket.emit('send_message', messageData);
       setMessageList((list) => [...list, messageData]);
       setCurrentMessage('');
     }
   };
-  // console.log(messageList);
+
   useEffect(() => {
-    props.socket.on('receive_message', (data) => {
+    socket.on('receive_message', (data) => {
       setMessageList((list) => [...list, data]);
     });
-  }, [props.socket]);
+  }, [socket]);
 
   return (
     <div className='chat-window'>
+      {/* Chatting header */}
       <div className='chat-header'>
         <p>Live Chat</p>
-        <AiOutlineClose
-          className='quit-window'
-          onClick={() => props.setUser({ name: '' })}
-        />
+        <AiOutlineClose className='quit-window' onClick={() => Logout()} />
       </div>
+
+      {/* Chatting body */}
       <div className='chat-body'>
         <ScrollToBottom className='message-container'>
           {messageList.map((messageContent) => {
             return (
               <div
                 className='message'
-                id={props.user.name === messageContent.name ? 'you' : 'other'}
+                id={user.name === messageContent.name ? 'you' : 'other'}
               >
                 <div>
                   <div className='message-content'>
+                    <p></p>
                     <p>{messageContent.message}</p>
                   </div>
                   <div className='message-meta'>
@@ -68,6 +68,8 @@ function ChatRoom(props) {
           })}
         </ScrollToBottom>
       </div>
+
+      {/* Input message */}
       <div className='chat-footer'>
         <input
           type='text'

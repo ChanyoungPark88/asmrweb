@@ -7,15 +7,14 @@ import ChatRoom from './components/ChatRoom';
 import io from 'socket.io-client';
 
 Modal.setAppElement('#root');
-
 const socket = io.connect('http://localhost:5000');
 
 function App() {
   // states
+
   const [isPlaying, setIsPlaying] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [user, setUser] = useState({ name: '' });
-  const [room, setRoom] = useState('');
 
   // references
   const audioPlayer = useRef();
@@ -27,7 +26,6 @@ function App() {
     setIsPlaying(!prevValue);
     if (!prevValue) {
       audioPlayer.current.play();
-      console.log(audioPlayer);
     } else {
       audioPlayer.current.pause();
     }
@@ -43,10 +41,10 @@ function App() {
     });
   };
 
-  const joinRoom = () => {
-    if (user.name !== '') {
-      socket.emit('join_room', room);
-    }
+  const Logout = () => {
+    setUser({
+      name: '',
+    });
   };
 
   // Modal Styles
@@ -113,15 +111,16 @@ function App() {
           onClick={() => setModalIsOpen(true)}
         />
       </div>
+
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={() => setModalIsOpen(false)}
         style={customStyles}
       >
-        {user.name !== '' ? (
-          <ChatRoom user={user} setUser={setUser} socket={socket} room={room} />
-        ) : (
+        {!user.name ? (
           <LoginForm Login={Login} setModalIsOpen={setModalIsOpen} />
+        ) : (
+          <ChatRoom user={user} Logout={Logout} socket={socket} />
         )}
       </Modal>
     </div>

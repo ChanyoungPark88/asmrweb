@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 
-function LoginForm({ Login, setModalIsOpen, joinRoom }) {
+function LoginForm({ Login, setModalIsOpen }) {
   const [user, setUser] = useState({ name: '' });
 
   const submitHandler = (e) => {
     e.preventDefault();
     Login(user);
-    console.log(user);
   };
 
   return (
@@ -28,9 +27,7 @@ function LoginForm({ Login, setModalIsOpen, joinRoom }) {
             value={user.name}
             required
           />
-          <button onClick={joinRoom} className='chat-enter'>
-            &#8629;
-          </button>
+          <button className='chat-enter'>&#8629;</button>
         </div>
       </div>
     </form>
