@@ -23,7 +23,6 @@ function ChatRoom({ socket, user, Logout }) {
           ':' +
           new Date(Date.now()).getMinutes(),
       };
-
       await socket.emit('send_message', messageData);
       setMessageList((list) => [...list, messageData]);
       setCurrentMessage('');
@@ -55,7 +54,6 @@ function ChatRoom({ socket, user, Logout }) {
               >
                 <div>
                   <div className='message-content'>
-                    <p></p>
                     <p>{messageContent.message}</p>
                   </div>
                   <div className='message-meta'>
