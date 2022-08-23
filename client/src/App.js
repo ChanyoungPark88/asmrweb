@@ -3,18 +3,13 @@ import { VscDebugPause, VscDebugStart } from 'react-icons/vsc';
 import Modal from 'react-modal';
 import './App.css';
 import LoginForm from './components/LoginForm';
-import ChatRoom from './components/ChatRoom';
-import io from 'socket.io-client';
 
 Modal.setAppElement('#root');
-const socket = io.connect('http://localhost:5000');
 
 function App() {
   // states
-
   const [isPlaying, setIsPlaying] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [user, setUser] = useState({ name: '' });
 
   // references
   const audioPlayer = useRef();
@@ -33,18 +28,6 @@ function App() {
 
   const changeVolume = (e) => {
     audioPlayer.current.volume = e.target.value / 100;
-  };
-
-  const Login = (user) => {
-    setUser({
-      name: user.name,
-    });
-  };
-
-  const Logout = () => {
-    setUser({
-      name: '',
-    });
   };
 
   // Modal Styles
@@ -114,14 +97,10 @@ function App() {
 
       <Modal
         isOpen={modalIsOpen}
-        onRequestClose={() => setModalIsOpen(false)}
+        onRequestClose={() => setModalIsOpen(true)}
         style={customStyles}
       >
-        {!user.name ? (
-          <LoginForm Login={Login} setModalIsOpen={setModalIsOpen} />
-        ) : (
-          <ChatRoom user={user} Logout={Logout} socket={socket} />
-        )}
+        <LoginForm modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} />
       </Modal>
     </div>
   );

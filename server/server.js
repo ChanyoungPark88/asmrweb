@@ -25,11 +25,12 @@ io.on('connection', (socket) => {
 
   socket.on('join_room', (data) => {
     socket.join(data);
-    console.log(`User with ID: ${socket.id} is joined room: ${data.room}`);
+    console.log(`User with ID: ${socket.id} is joined room: ${data}`);
   });
 
   socket.on('send_message', (data) => {
     socket.to(data.room).emit('receive_message', data);
+    console.log(data);
   });
 
   socket.on('disconnect', () => {
@@ -39,6 +40,9 @@ io.on('connection', (socket) => {
 
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
+  app.get('/', (req, res) => {
+    res.send('API is Running');
+  });
   console.log(`Server is Running on Port ${PORT}`.yellow.bold);
 });
 

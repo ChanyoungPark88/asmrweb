@@ -3,13 +3,14 @@ import { AiOutlineClose } from 'react-icons/ai';
 import ScrollToBottom from 'react-scroll-to-bottom';
 // import axios from 'axios';
 
-function ChatRoom({ socket, user, Logout }) {
+function ChatRoom({ socket, user, room, setModalIsOpen }) {
   const [currentMessage, setCurrentMessage] = useState('');
   const [messageList, setMessageList] = useState([]);
 
   const sendMessage = async () => {
     if (currentMessage !== '') {
       const messageData = {
+        room: room,
         name: user.name,
         message: currentMessage,
         time:
@@ -40,7 +41,12 @@ function ChatRoom({ socket, user, Logout }) {
       {/* Chatting header */}
       <div className='chat-header'>
         <p>Live Chat</p>
-        <AiOutlineClose className='quit-window' onClick={() => Logout()} />
+        <AiOutlineClose
+          className='quit-window'
+          onClick={() => {
+            setModalIsOpen(false);
+          }}
+        />
       </div>
 
       {/* Chatting body */}
