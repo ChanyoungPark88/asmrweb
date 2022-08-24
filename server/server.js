@@ -8,6 +8,7 @@ const cors = require('cors');
 const { Server } = require('socket.io');
 
 const app = express();
+
 app.use(cors());
 
 // Form here Realtime Socket PART
@@ -43,35 +44,6 @@ server.listen(PORT, () => {
   app.get('/', (req, res) => {
     res.send('API is Running');
   });
+
   console.log(`Server is Running on Port ${PORT}`.yellow.bold);
 });
-
-// app.get('/', (req, res) => {
-//   res.send('API is Running');
-// });
-// app.listen(5000, console.log(`Server is Running on Port ${PORT}`.yellow.bold));
-
-// dotenv.config();
-// Connect to the MongoDB
-// connectDB();
-// Create express app
-
-// const messages = [];
-
-// Middleware
-// app.use(express.json());
-// app.use(express.static(path.join(__dirname, '../client/build')));
-
-// FetchMessages
-// app.get('/api/messages', (req, res) => {
-//   console.log('api/messages called!');
-//   res.json(messages);
-// });
-
-// SendMessage
-// app.post('/api/message', (req, res) => {
-//   const message = req.body.data;
-//   console.log('Adding Message::::', message);
-//   messages.push(message);
-//   res.json('message' + message + 'added');
-// });

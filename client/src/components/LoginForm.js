@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
-import Modal from 'react-modal';
 import io from 'socket.io-client';
 import ChatRoom from './ChatRoom';
 
-// Modal.setAppElement('#root');
 const socket = io.connect('http://localhost:5000');
 
 function LoginForm({ setModalIsOpen }) {
